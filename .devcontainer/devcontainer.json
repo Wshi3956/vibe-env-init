@@ -1,0 +1,21 @@
+{
+  "name": "opencode-containers",
+  "image": "miskamyasa/mise-ub-24-04:2",
+  "remoteUser": "ubuntu",
+  "workspaceFolder": "${localWorkspaceFolder}",
+  "workspaceMount": "source=${localWorkspaceFolder},target=${localWorkspaceFolder},type=bind",
+  "containerEnv": {
+    "MISE_TRUSTED_CONFIG_PATHS": "${localWorkspaceFolder}",
+    "OPENCODE_YOLO": true
+  },
+  "mounts": [
+    "source=${localEnv:HOME}/.cache/containers/cache,target=/home/ubuntu/.cache,type=bind",
+    "source=${localEnv:HOME}/.cache/containers/local-share,target=/home/ubuntu/.local/share,type=bind",
+    "source=${localEnv:HOME}/.local/share/opencode,target=/home/ubuntu/.local/share/opencode,type=bind",
+    "source=${localEnv:HOME}/.config/opencode,target=/home/ubuntu/.config/opencode,type=bind,readonly"
+  ],
+  "runArgs": [
+    "--name=opencode-containers"
+  ],
+  "postCreateCommand": "mise install"
+}
