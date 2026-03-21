@@ -4,6 +4,8 @@ Scaffold any project to run [opencode](https://opencode.ai) CLI inside a devcont
 
 One command sets up `.devcontainer/`, `.opencode/`, and `mise.toml`.
 
+![avif](assets/video.avif)
+
 ## Quick Start
 
 ```bash
