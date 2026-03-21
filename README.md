@@ -91,6 +91,110 @@ your-project/
   mise.toml               # Tool versions (node, npm, devcontainer cli, opencode, gh)
 ```
 
+## Usage Example: Plan, Execute, Review Workflow
+
+The scaffolded `.opencode/` directory provides a three-phase workflow for implementing features. Each phase uses a dedicated slash command and specialized AI agents.
+
+### Step 1: Initialize the devcontainer
+
+```bash
+bash <(curl -fsSL https://raw.githubusercontent.com/Miskamyasa/vibe-env-init/main/init.sh) my-project
+```
+
+Choose a session mode when prompted, then start the container:
+
+```bash
+devcontainer up --workspace-folder .
+devcontainer exec --workspace-folder . opencode
+```
+
+Or use the `oc` wrapper if you set it up (see [Wrapper script](#wrapper-script)).
+
+### Step 2: Plan (`/plan`)
+
+Inside opencode, describe what you want to build:
+
+```
+/plan add a homepage benefits section
+```
+
+The `/plan` command triggers **Phase 1**. It uses the `plan` agent (Claude Opus) to:
+- Read `AGENTS.md` and any referenced files for project conventions
+- Investigate the codebase for existing patterns and architecture
+- Produce a dependency-ordered list of implementation steps with acceptance criteria
+
+Wait for the plan to complete. Review the output — it will contain numbered steps (S1, S2, ...) with scope, dependencies, and acceptance criteria for each.
+
+### Step 3: Execute (`/execute`)
+
+Once you are satisfied with the plan, run:
+
+```
+/execute
+```
+
+The `/execute` command triggers **Phase 2**. It uses the `build` agent (GPT-5.3 Codex) to:
+- Walk through each planned step in dependency order
+- Spawn sub-agents for each step with implementation-only prompts
+- Handle failures by inserting remediation steps and retrying
+- Produce an execution summary with status per step and list of modified files
+
+Wait for execution to finish. The agent will report which steps succeeded, failed, or were blocked.
+
+### Step 4: Review (`/review`)
+
+After execution completes, run:
+
+```
+/review
+```
+
+The `/review` command triggers **Phase 3**. It spawns a read-only `review` sub-agent that:
+- Verifies each planned step was implemented correctly (plan fidelity)
+- Checks for regressions at API boundaries, state transitions, and error paths
+- Validates acceptance criteria coverage
+- Flags maintainability issues in touched areas
+
+If the review finds critical issues, the agent will add fix steps and re-execute automatically. Once the review passes, you get:
+- A structured review report with findings and verdict
+- A **proposed commit message** (title + body with list of changes)
+
+### Step 5: Commit
+
+Copy the proposed commit message from the review output and commit the changes yourself:
+
+```bash
+git add -A
+git commit -m "feat: add homepage benefits section
+
+- Add BenefitsSection component with responsive grid layout
+- Create benefits data module with icon mappings
+- Integrate section into homepage below hero block
+- Add unit tests for BenefitsSection rendering"
+```
+
+Review the diff before committing — the proposed message is a suggestion, not a guarantee.
+
+### Agents Reference
+
+| Agent | Model | Mode | Purpose |
+|-------|-------|------|---------|
+| `investigate` | GPT-5.3 Codex | primary (default) | Read-only codebase investigation, mapping structure, tracing dependencies |
+| `plan` | Claude Opus 4.5 | primary | Produces execution-ready implementation plans |
+| `build` | GPT-5.3 Codex | primary | Executes implementation steps via sub-agents |
+| `explore` | Gemini 3 Flash | subagent | Fast, broad codebase exploration for investigation |
+| `review` | GPT-5.2 | subagent | Read-only code review with severity-rated findings |
+
+### Commands Reference
+
+| Command | Phase | Description |
+|---------|-------|-------------|
+| `/plan <description>` | 1 | Investigate codebase and produce an implementation plan |
+| `/execute` | 2 | Execute the plan step-by-step via sub-agents |
+| `/review` | 3 | Run independent code review and produce commit message |
+
+> **Tip:** The `investigate` agent is the default mode. When you open opencode, you can ask questions about the codebase and it will explore in read-only mode without making any changes. Switch to the workflow above when you are ready to implement.
+
 ## Conflict Handling
 
 If a file already exists, the script will:
