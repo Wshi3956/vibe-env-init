@@ -1,6 +1,6 @@
 {
   "name": "{{PROJECT_NAME}}",
-  "image": "miskamyasa/mise-ub-24-04:2",
+  "image": "miskamyasa/mise-ub-24-04:3",
   "remoteUser": "ubuntu",
   "workspaceFolder": "${localWorkspaceFolder}",
   "workspaceMount": "source=${localWorkspaceFolder},target=${localWorkspaceFolder},type=bind",
